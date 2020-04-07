@@ -1,0 +1,53 @@
+
+(define x 10)
+
+(define y (lambda () (+ y 1)))
+
+(let ((x 10)
+      (y (lambda () (+ y 1))))
+     (+ x (y 10)))
+
+
+
+AssignAST
+    var --> VarAST
+                var_name
+    lhs --> | NumAST
+                num_val
+            | VarAST
+                var_name
+            | ProcAST
+                param_lst --> List[VarAST]
+                body    --> | FuncCallAST
+                            | NumAST
+                            | ...
+
+LetAST
+    assign_lst  --> List[AssignAST]
+    body        --> | FuncCallAST
+                            func_name
+                            arg_lst
+                    | ...
+
+FuncCallAST
+    arg_lst --> List[
+                        | NumAST
+                        | VarAST
+                        | FuncCallAST
+                    ]
+
+
+==========================================
+
+value-of(BaseAST, env) -> (any, env)
+
+value-of(NumAST, env) -> ((num-val {}), env)
+value-of(VarAST, env) -> | ((num-val {}), env)
+                         | ((bool-val {}), env)
+                         | ((str-val {}), env)
+value-of(ProcAST, env) -> ((proc-val {}), env)
+
+
+[var_name, (num-val {}), old_env]
+[proc_name, (proc-val {}), old_env]
+

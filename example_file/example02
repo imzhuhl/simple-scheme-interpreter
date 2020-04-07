@@ -1,0 +1,8 @@
+; fdasf
+(+ 4 (* 10 3))
+
+(define test
+    (lambda (x y)
+        (+ 10 (* x y))))
+
+(test 3 4)
